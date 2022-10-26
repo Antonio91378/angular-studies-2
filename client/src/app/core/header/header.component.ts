@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from './../user/user.service';
 import { Observable } from 'rxjs';
 import { User } from '../user/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,13 +10,16 @@ import { User } from '../user/user';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  user$: Observable<User>;
-  user?: User;
+  user$: Observable<User | null>;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
     this.user$ = userService.getUser();
-    this.user$.subscribe((retorno) => (this.user = retorno));
   }
 
   ngOnInit(): void {}
+
+  logout() {
+    this.userService.logout();
+    this.router.navigate(['']);
+  }
 }
