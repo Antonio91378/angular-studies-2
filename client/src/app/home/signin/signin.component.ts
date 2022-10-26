@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
-import { PlataformDetectorService } from '../../../core/plataform-detector/plataform-detector.service';
+import { PlataformDetectorService } from '../../core/plataform-detector/plataform-detector.service';
 
 @Component({
   selector: 'app-signin',
