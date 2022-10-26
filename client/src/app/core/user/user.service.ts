@@ -10,17 +10,22 @@ import jwt_decode from 'jwt-decode';
 export class UserService {
   private userSubject = new Subject<User>();
 
-  constructor(private localStorageService: LocalStorageService) {}
+  constructor(private localStorageService: LocalStorageService) {
+    this.localStorageService.hasToken() && this.decodeAndNotify();
+  }
 
   setToken(token: string) {
     this.localStorageService.setToken(token);
     this.decodeAndNotify();
   }
 
-  getUser() {}
+  getUser() {
+    return this.userSubject.asObservable();
+  }
 
   private decodeAndNotify() {
     const token = this.localStorageService.getToken();
     const user = jwt_decode(token!) as User;
+    this.userSubject.next(user);
   }
 }
