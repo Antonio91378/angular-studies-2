@@ -55,6 +55,14 @@
       *ngIf="signupForm.get('userName')?.errors?.['maxlength']"
       text="the max length is 30!"
     ></ap-vmessage>
+    <ap-vmessage
+      *ngIf="signupForm.get('userName')?.errors?.['userNameTaken']"
+      text="Username already taken"
+    >
+    </ap-vmessage>
+    <small *ngIf="signupForm.get('userName')?.valid" class="text-success"
+      >User available</small
+    >
   </div>
 
   <div class="form-group">
@@ -78,7 +86,9 @@
     ></ap-vmessage>
   </div>
 
-  <button class="btn btn-primary btn-block">Register</button>
+  <button [disabled]="signupForm.invalid" class="btn btn-primary btn-block">
+    Register
+  </button>
 
   <p>Already a user?<a [routerLink]="['']">Sign In!</a></p>
 </form>
