@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { lowerCaseValidator } from './../../shared/validators/lower-case.validator';
 
 @Component({
   selector: 'app-signup',
@@ -27,6 +28,7 @@ export class SignupComponent implements OnInit {
         '',
         [
           Validators.required,
+          lowerCaseValidator,
           Validators.minLength(2),
           Validators.maxLength(30),
         ],
