@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
@@ -7,7 +8,37 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
-  constructor(private router: Router) {}
+  signupForm!: FormGroup;
 
-  ngOnInit(): void {}
+  constructor(private router: Router, private formBuilder: FormBuilder) {}
+
+  ngOnInit(): void {
+    this.signupForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      fullName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(40),
+        ],
+      ],
+      userName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(30),
+        ],
+      ],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(14),
+        ],
+      ],
+    });
+  }
 }
