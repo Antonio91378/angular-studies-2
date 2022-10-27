@@ -8,10 +8,18 @@ import { PhotoListResolver } from './photos/photo-list/photo-list.resolver';
 import { SigninComponent } from './home/signin/signin.component';
 import { GuardService } from './core/auth/guard.service';
 import { SignupComponent } from './home/signup/signup.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  { path: '', component: SigninComponent, canActivate: [GuardService] },
-  { path: 'signup', component: SignupComponent },
+  {
+    path: '',
+    component: HomeComponent,
+    canActivate: [GuardService],
+    children: [
+      { path: '', component: SigninComponent },
+      { path: 'signup', component: SignupComponent },
+    ],
+  },
   {
     path: 'user/:userName',
     component: PhotoListComponent,
