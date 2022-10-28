@@ -2,7 +2,7 @@
   <nav class="navbar navbar-light bg-white">
     <a class="navbar-brand">ALURAPIC</a>
     <div *ngIf="user$ | async as user; else login">
-      <i class="fa fa-user-circle"></i>
+      <i style="padding-right: 5px" class="fa fa-user-circle"></i>
       <a>{{ user.name }}</a>
       <div>
         <a href="" (click)="logout()">logout</a>
