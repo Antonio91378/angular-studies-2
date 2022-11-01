@@ -1,13 +1,22 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PhotoFormComponent } from './photo-form.component';
-import { VMessageModule } from './../../shared/components/vmessage/vmessage.module';
+import { NgModule } from "@angular/core";
+import { PhotoFormComponent } from "./photo-form.component";
+import { CommonModule } from "@angular/common";
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { VMessageModule } from "../../shared/components/vmessage/vmessage.module";
+import { PhotoModule } from "./../photo/photo.module";
+import { RouterModule } from "@angular/router";
+import { ImmediateClickModule } from "./../../shared/directives/immediate-click.directive/immediate-click.module";
 
 @NgModule({
   declarations: [PhotoFormComponent],
-  imports: [CommonModule, ReactiveFormsModule, VMessageModule, FormsModule],
-  exports: [PhotoFormComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    VMessageModule,
+    FormsModule,
+    RouterModule,
+    PhotoModule,
+    ImmediateClickModule,
+  ],
 })
 export class PhotoFormModule {}

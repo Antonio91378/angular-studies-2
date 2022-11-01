@@ -1,20 +1,16 @@
-import { PhotoComponent } from '../photos/photo/photo.component';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-import { PhotoListComponent } from './photo-list/photo-list.component';
-import { PhotosComponent } from './photo-list/photos/photos.component';
-import { filterByDescription } from './photo-list/filter-by-description.pipe';
+import { PhotoModule } from './photo/photo.module';
 import { PhotoFormModule } from './photo-form/photo-form.module';
+import { PhotoListModule } from './photo-list/photo-list.module';
+import { CardModule } from '../shared/components/card/card.module';
+import { DarkenOnHoverModule } from '../shared/directives/darken-on-hover/darken-on-hover.module';
 
 @NgModule({
-  declarations: [
-    PhotoComponent,
-    PhotoListComponent,
-    PhotosComponent,
-    filterByDescription,
-  ],
-  imports: [CommonModule, HttpClientModule, PhotoFormModule],
-  exports: [PhotoComponent, HttpClientModule],
+    imports: [ 
+        PhotoModule,
+        PhotoFormModule,
+        PhotoListModule,
+        DarkenOnHoverModule
+    ]
 })
 export class PhotosModule {}
