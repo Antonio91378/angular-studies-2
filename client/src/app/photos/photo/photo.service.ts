@@ -1,8 +1,10 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { Observable, of, throwError } from "rxjs";
+import { catchError, map } from "rxjs/operators";
 
 import { Photo } from "./photo";
+import { PhotoComment } from "./photo-comment";
 
 const API = "http://localhost:3000";
 
@@ -29,7 +31,34 @@ export class PhotoService {
     return this.http.post(API + "/photos/upload", formData);
   }
 
-  findById(id: string): Observable<Photo> {
-    return this.http.get<Photo>(API + "/photos/" + id);
+  findById(photoId: number): Observable<Photo> {
+    return this.http.get<Photo>(API + "/photos/" + photoId);
+  }
+
+  getComments(photoId: number) {
+    return this.http.get<PhotoComment[]>(
+      API + "/photos/" + photoId + "/comments"
+    );
+  }
+
+  addComment(photoId: number, commentText: string) {
+    return this.http.post(API + "/photos/" + photoId + "/comments", {
+      commentText: commentText,
+    });
+  }
+
+  removePhoto(photoId: number) {
+    return this.http.delete(API + "/photos/" + photoId);
+  }
+
+  like(photoId: number) {
+    return this.http
+      .post(API + "/photos/" + photoId + "/like", {}, { observe: "response" })
+      .pipe(map((res) => true))
+      .pipe(
+        catchError((err) => {
+          return err.status == "304" ? of(false) : throwError(err);
+        })
+      );
   }
 }
